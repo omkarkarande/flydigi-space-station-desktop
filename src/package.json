@@ -1,0 +1,8 @@
+{
+  "name": "flydigi-space-station-desktop",
+  "productName": "Flydigi Space Station",
+  "version": "1.1.0",
+  "private": true,
+  "main": "main.js",
+  "description": "Unofficial standalone desktop wrapper for Flydigi Space Station"
+}

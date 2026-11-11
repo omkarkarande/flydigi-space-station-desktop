@@ -1,0 +1,19 @@
+name: Validate updater
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test updater policies and failures
+        shell: powershell
+        run: .\tests\runtime.tests.ps1
+      - name: Check JavaScript syntax
+        shell: powershell
+        run: |
+          Get-ChildItem src -Filter *.js | ForEach-Object {
+            node --check $_.FullName
+            if ($LASTEXITCODE -ne 0) { throw "Syntax check failed: $($_.Name)" }
+          }
